@@ -1,6 +1,6 @@
 # PopupStore_viewer
 
-![header](https://user-images.githubusercontent.com/27846824/201936135-ee9ad674-ca48-4edd-bd1c-5a4dc37f5f80.png)
+![erd](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/8448cd7d-8ddc-4854-94b8-553d26527906)
 
 
 # In-And-Out
