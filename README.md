@@ -1,7 +1,7 @@
 # PopupStore_viewer
 
 ![erd](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/8448cd7d-8ddc-4854-94b8-553d26527906)
-
+![3조_포트폴리오](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/63613966-b79e-4a87-9c52-76af59884f73)
 
 # In-And-Out
 
