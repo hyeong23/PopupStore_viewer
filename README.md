@@ -1,9 +1,6 @@
 # PopupStore_viewer
 
-![erd](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/8448cd7d-8ddc-4854-94b8-553d26527906)
-![3조_포트폴리오](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/63613966-b79e-4a87-9c52-76af59884f73)
-
-# In-And-Out
+![포트폴리오](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/63613966-b79e-4a87-9c52-76af59884f73)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -12,7 +9,7 @@
 <table>
   <tr>
     <td>
-달력 UI를 통한 수입/지출 체크 및 일기 쓰기 그리고 다양한 인터페이스로 심플한 수입/지출 관리 서비스를 제공하는 사이트
+여러곳에 흩어져 있는 다양한 팝업스토어 정보를 한번에 쉽게 확인할 수 있는 웹서비스
     </td>
   </tr>
 </table>
@@ -28,7 +25,8 @@
 <table>
   <tr>
     <td>
-단순한 가계부를 작성하기에는 기존에 존재하는 네이버 가계부와 같은 앱들이 UI/UX 관점에서 복잡하고 한눈에 들어오지 않아 사용자가 필요한 부분에 집중 할 수 있게 Material Design과 기존 부족한 그래프 기능을 보완하기 위해 Chart.js를 사용해 심플한 가계부를 만들었습니다. 또, 일기기능을 추가하여 그 날의 수입지출내역을 회고할 수 있습니다.
+일반적으로 팝업스토어의 진행 일정이 너무 짦고, 그에 대한 정보가 다양한 플랫폼에 흩어져 있는 특성 때문에 고객이 원하는 팝업스토어 정보를 찾기가 쉽지않은 불편함이 있기 때문에 이를 해결하고자, 팝업스토어를 주최하는 공식사이트를 직접 조회하지 않더라도 관심 있는 고객에게
+팝업스토어 정보제공을 쉽게 만들기 위해 서비스를 제작함
     </td>
   </tr>
 </table>
@@ -46,9 +44,9 @@
 
 1. 달력
    (영상)
-2. 수입/지출
+2. 지도
    (영상)
-3. 월간/연간 보고서
+3. 카드뷰
 <div>
    <img src="https://user-images.githubusercontent.com/70008599/202196778-b4a1a90a-c3b7-4e67-93fd-8294d254babb.gif"/>
 </div>
