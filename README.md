@@ -35,7 +35,7 @@
 
 ### 프로젝트 구조
 
-![structure-final](https://user-images.githubusercontent.com/98104603/204092433-41a98f24-cdc7-4240-b217-25c119252a7c.png)
+![Untitled (1)](https://github.com/hyeong23/PopupStore_viewer/assets/129251061/b7ca41cd-7541-4c80-a443-b58553307eec)
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
