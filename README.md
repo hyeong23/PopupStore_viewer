@@ -14,9 +14,6 @@
   </tr>
 </table>
 
-#### Demo
-
-> live demo: [link](http://ec2-3-34-206-181.ap-northeast-2.compute.amazonaws.com:3000/)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
