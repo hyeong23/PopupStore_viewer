@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="popup.mapper.CategoryMapper">
+  
+  
+  
+  
+  <insert id="insertCategory"> 
+        INSERT INTO category
+        (category_num ,store_num, category)
+        VALUES
+        (category_sequence.nextval, #{storeNum},#{category1})
+  </insert>
+  
+  <!-- 보조강사: updateCategory를 통해 카테고리의 기본키(category_num)를 업데이트하는 게 부적절하다고 생각하여 변경하였습니다. -->
+   <update id="updateCategory"> 
+       	UPDATE category
+       	SET category = #{category1} <!-- 보조강사 -->
+        WHERE store_num = #{storeNum}
+  </update>
+  
+   <!-- <update id="updateCategory"> 
+       	UPDATE category
+       	SET category_num = #{categoryNum},
+       		category = #{category}
+        WHERE store_num = #{storeNum}
+  </update> -->
+  
+    <resultMap id="categoryResultMap" type="popup.dto.Category">
+        <result property="categoryNum" column="category_num" />
+        <result property="storeNum" column="store_num" />
+        <result property="category" column="category" />
+    </resultMap> 
+  
+  
+  <select id="getStoreByCategory" resultType="int">
+   	 	SELECT store_num FROM category
+    	WHERE category = #{category}
+	</select>
+  
+  
+  
+   <select id="getCategoryOne" resultType="String">
+   	 	SELECT category FROM category
+    	WHERE store_num = #{storeNum}
+	</select>
+  
+  
+  
+  
+  
+</mapper>

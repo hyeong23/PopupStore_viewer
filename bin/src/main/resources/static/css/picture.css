@@ -1,0 +1,197 @@
+.slider{
+    width: 490px;
+    height: 520px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden; /* 현재 슬라이드 오른쪽에 위치한 나머지 슬라이드 들이 보이지 않도록 가림 */
+}
+.slider input[type=radio]{
+    display: none;
+}
+
+ul.imgs{
+    padding: 0;
+    margin: 0;
+    list-style: none;    
+}
+ul.imgs li{
+    position: absolute;
+    left: 640px;
+    transition-delay: 1s; /* 새 슬라이드가 이동해 오는 동안 이전 슬라이드 이미지가 배경이 보이도록 지연 */
+	
+    padding: 0;
+    margin: 0;
+}
+.bullets{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 2;
+}
+.bullets label{
+    display: inline-block;
+    border-radius: 50%;
+    background-color: gray;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+/* 현재 선택된 불릿 배경 흰색으로 구분 표시 */
+.slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
+    background-color: #9BC3FF
+;
+}
+.slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
+    background-color:#9BC3FF
+;
+}
+.slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(5):checked~.bullets>label:nth-child(5){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(6):checked~.bullets>label:nth-child(6){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(7):checked~.bullets>label:nth-child(7){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(8):checked~.bullets>label:nth-child(8){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(9):checked~.bullets>label:nth-child(9){
+    background-color: #9BC3FF;
+}
+.slider input[type=radio]:nth-child(10):checked~.bullets>label:nth-child(10){
+    background-color: #9BC3FF;
+}
+
+
+
+
+
+
+.slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+}
+.slider input[type=radio]:nth-child(2):checked~ul.imgs>li:nth-child(2){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+}
+.slider input[type=radio]:nth-child(3):checked~ul.imgs>li:nth-child(3){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+}
+.slider input[type=radio]:nth-child(4):checked~ul.imgs>li:nth-child(4){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+.slider input[type=radio]:nth-child(5):checked~ul.imgs>li:nth-child(5){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+.slider input[type=radio]:nth-child(6):checked~ul.imgs>li:nth-child(6){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+.slider input[type=radio]:nth-child(7):checked~ul.imgs>li:nth-child(7){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+.slider input[type=radio]:nth-child(8):checked~ul.imgs>li:nth-child(8){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+.slider input[type=radio]:nth-child(9):checked~ul.imgs>li:nth-child(9){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+.slider input[type=radio]:nth-child(10):checked~ul.imgs>li:nth-child(10){
+    left: 0;
+    transition: 0.5s;
+    z-index:1;
+} 
+
+
+
+.slider img {
+    max-width: 490px;
+}
+
+.picture-title{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 500;
+}
+
+.picture-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+.picture-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+}
+.picture-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+    border-bottom-right-radius: calc(0.3rem - 1px);
+    border-bottom-left-radius: calc(0.3rem - 1px);
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+
+.thumbnail{
+    width: 490px;
+    height: 220px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden; /* 현재 슬라이드 오른쪽에 위치한 나머지 슬라이드 들이 보이지 않도록 가림 */
+    padding-left: 120px;
+}
+
+

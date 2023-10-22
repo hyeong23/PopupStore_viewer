@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popup.mapper.FavoriteMapper">
+
+
+	<select id="getStoreByHeart" resultType="int">
+		SELECT store_num FROM
+		favorite
+		WHERE member_num = #{customerNum}
+	</select>
+
+	<!-- 사용자의 회원 번호에 해당하는 좋아요 정보를 조회하는 쿼리 -->
+	<select id="getLikedStoresByMemberNum" resultMap="getfavorite2">
+		SELECT m.member_company_name, s.store_num, s.store_loc, s.store_loc_detail, s.store_title, s.store_body, s.store_intro, s.store_start, s.store_end, s.store_site, s.store_count, s.store_create , s.store_update , p.picture_name,s.store_favorite
+		FROM store s
+		JOIN member m ON m.member_num = s.member_num
+		JOIN favorite f ON f.store_num = s.store_num
+		JOIN picture p ON p.store_num = s.store_num
+		WHERE f.member_num = #{customerNum} AND p.picture_type = 1
+	</select>
+
+	<select id="checkHeart" resultMap="getfavorite">
+		SELECT favorite_status FROM
+		favorite
+		WHERE member_num = #{memberNum} AND store_num = #{storeNum}
+	</select>
+
+	<insert id="insertHeart">
+		INSERT INTO favorite(favorite_num, member_num,
+		store_num, favorite_status)
+		VALUES(favorite_sequence.nextval,
+		#{memberNum}, #{storeNum}, 1)
+	</insert>
+
+	<delete id="deleteHeart">
+		DELETE FROM favorite
+		WHERE member_num = #{memberNum}
+		AND store_num = #{storeNum}
+	</delete>
+
+
+	<resultMap id="getfavorite2" type="popup.vo.StoreVo">
+		<result property="storeNum" column="store_num" />
+         <result property="memberNum" column="member_num" />
+         <result property="memberCompanyName" column="member_company_name" />
+        <result property="storeTitle" column="store_title" />
+        <result property="storeIntro" column="store_intro" />
+        <result property="storeBody" column="store_body" />
+        <result property="storeStart" column="store_start" />
+        <result property="storeEnd" column="store_end" />
+        <result property="storeFavorite" column="store_favorite" />
+        <result property="storeLoc" column="store_loc"/>
+        <result property="storeLocDetail" column="store_loc_detail"/>
+        <result property="storeSite" column="store_site"/>
+        <result property="storeStatus" column="store_status" />      
+        <result property="pictureName" column="picture_name" />
+        <result property="pictureNum" column="picture_num" />
+        <result property="storeCount" column="store_count" />
+		<result property="storeCreate" column="store_create" />
+		<result property="storeUpdate" column="store_update" />
+	</resultMap>
+
+
+	<resultMap id="getfavorite" type="popup.dto.Favorite">
+		<result property="favoriteStatus" column="favorite_status" />
+	</resultMap>
+
+</mapper>
