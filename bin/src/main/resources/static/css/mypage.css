@@ -1,0 +1,135 @@
+.mypage-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff4fd;
+  padding: 20px;
+  align-items: center;
+  width: 230px;
+}
+
+.mypage-item {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  text-align: left;
+  width: 180px;
+}
+
+.mypage-item h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #333333;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff4fd;
+  padding: 20px; 
+  align-items: flex-start !important; /* 왼쪽 정렬 */
+  width: 240px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.filter-item {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  margin-bottom: 5px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  font-size: 12pt;
+  padding-bottom: 2px;
+  max-height: 120px;
+  overflow: auto;
+}
+
+.filter-item-select {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  margin-bottom: 5px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  font-size: 12pt;
+  padding-bottom: 2px;
+}
+
+.filter-input {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 170px;
+  margin-top: -5px;
+  margin-bottom: 15px;
+  font-size: 12pt;
+  padding-bottom: 2px;
+}
+
+.dropdown-box{
+  display : block;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 210px;
+  margin-bottom: 5px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  font-size: 12pt;
+  padding-bottom: 2px;
+}
+
+.dropdown-content{
+  display:none;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  margin-bottom: 20px;
+  font-size: 12pt;
+  padding-bottom: 2px;
+  z-index: 1;
+}
+
+.dropdown-content a{
+  display : block;
+  text-decoration : none;
+}
+
+.dropdown-content a:hover{
+  background-color : #ececec
+}
+
+.dropdown-box:hover .dropdown-content{
+  display: block;
+}
+
+.admintable{
+	width: 831px;
+}
+
+
+.admintable td, .admintable th {
+	width:auto;
+    padding: 8px;
+    padding-top:13px;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.fixed-header-table {
+        width: 100%; /* 선택 사항, 필요에 따라 너비를 조정합니다 */
+    }
+
+.admintable thead, .table thead {
+        position: sticky;
+        top: 0;
+        background-color: #ff80c0; /* 헤더의 배경색을 설정하세요 */
+        text-align: center;
+        color: white;
+    }
+

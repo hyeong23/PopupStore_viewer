@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="popup.mapper.StoreMapper">
+
+	<select id="test" resultType="HashMap">
+		SELECT DISTINCT
+		s.*, p.picture_num, p.picture_original_name, p.picture_size,
+		p.picture_path || '\' || p.picture_name as picture_paths,
+		p.picture_date, c.*
+		FROM store s
+		JOIN picture p ON s.store_num = p.store_num
+		JOIN category c ON s.store_num = c.store_num
+		WHERE s.store_num = #{storeNum}
+	</select>
+
+	<select id="getStore" resultType="HashMap">
+		SELECT DISTINCT
+		s.*, m.member_company_name,p.picture_num, p.picture_original_name,
+		p.picture_size, p.picture_path || '\' || p.picture_name as
+		picture_paths, p.picture_date, c.*
+		FROM store s
+		JOIN member m ON s.member_num = m.member_num
+		JOIN picture p ON s.store_num = p.store_num
+		JOIN category c ON s.store_num = c.store_num
+
+	</select>
+
+
+	<select id="getStoreList" resultMap="storeResultMap">
+
+		SELECT s.store_num, s.store_title, m.member_company_name,m.member_nickname
+		,s.store_count, s.store_status,m.member_type
+		FROM store s
+		JOIN member m ON s.member_num = m.member_num
+		ORDER BY s.store_num DESC
+
+	</select>
+	
+	<select id="getStoreListByMember" parameterType="int" resultMap="storeResultMap">
+
+		SELECT s.store_num, s.store_title, m.member_company_name,m.member_nickname
+		,s.store_count, s.store_status
+		FROM store s
+		JOIN member m ON s.member_num = m.member_num
+ 		where s.member_num = #{memberNum}
+		ORDER BY s.store_num DESC
+		
+	</select>
+	
+	
+	<resultMap id="storeResultMap" type="popup.vo.StoreVo">
+		<result property="storeNum" column="store_num" />
+		<result property="storeTitle" column="store_title" />
+		<result property="storeIntro" column="store_intro" />
+		<result property="storeStart" column="store_start" />
+		<result property="storeEnd" column="store_end" />
+		<result property="storeBody" column="store_body" />
+		<result property="storeLoc" column="store_loc" />
+		<result property="storeLocDetail" column="store_loc_detail" />
+		<result property="storeSite" column="store_site" />
+		<result property="memberCompanyName"
+			column="member_company_name" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberType" column="member_type" />
+		<result property="storeCount" column="store_count" />
+		<result property="storeStatus" column="store_status" />
+		<result property="storeCreate" column="store_create" />
+		<result property="storeUpdate" column="store_update" />
+	</resultMap>
+
+	<insert id="insertStore" parameterType="popup.dto.Store">
+		INSERT INTO store
+		(store_num, member_num, store_title, store_intro, store_body, store_start,
+		store_end, store_loc,store_loc_detail, store_site)
+		VALUES
+		(store_sequence.nextval, #{memberNum}, #{storeTitle}, #{storeIntro}, #{storeBody},
+		#{storeStart}, #{storeEnd}, #{storeLoc},#{storeLocDetail},
+		#{storeSite})
+
+	</insert>
+
+	<update id="updateStore" parameterType="popup.dto.Store">
+		UPDATE store
+		SET
+		store_title = #{storeTitle},
+		store_intro = #{storeIntro},
+		store_body = #{storeBody},
+		store_start = #{storeStart},
+		store_end = #{storeEnd},
+		store_favorite = #{storeFavorite},
+		store_loc = #{storeLoc},
+		store_site = #{storeSite},
+		store_status = 0
+		WHERE store_num = #{storeNum}
+	</update>
+
+
+	<select id="getMaxStoreNum" resultType="int">
+		SELECT MAX(store_num) FROM store
+	</select>
+
+
+	<select id="getStoreBySmallDate" resultType="int">
+		SELECT store_num FROM store
+		WHERE store_start &lt;= sysDate And store_end &gt;= sysDate
+	</select>
+
+	<select id="getStoreByBigDate" resultType="int">
+		SELECT store_num FROM store
+		WHERE store_start &gt; sysDate
+	</select>
+
+	<select id="getStoreByCompanyName" resultType="int">
+		SELECT store_num
+		FROM store
+		WHERE member_num IN (
+		SELECT member_num FROM member WHERE member_company_name IN
+		<foreach item="item" collection="memberCompanyName" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		)
+		ORDER BY store_num ASC
+	</select>
+
+	<select id="getStoreByStoreTitle" resultType="int">
+		SELECT store_num FROM store
+		WHERE store_title IN
+		<foreach item="storeTitle" collection="storeTitle" open="("
+			separator="," close=")">
+			#{storeTitle}
+		</foreach>
+	</select>
+
+	<select id="getStoreByLoc" resultType="int">
+		SELECT store_num FROM store
+		WHERE store_loc LIKE CONCAT(#{storeLoc}, '%')
+	</select>
+
+
+	<!-- select one -->
+	<select id="getStoreOne" resultMap="storeResultMap">
+		SELECT s.store_num, s.store_title, m.member_company_name,m.member_nickname
+		,s.store_count, s.store_status,s.store_intro,s.store_start,s.store_end,s.store_body,s.store_loc,s.store_loc_detail,s.store_site
+		FROM store s
+		JOIN member m ON s.member_num = m.member_num
+		where store_num = #{storeNum}
+	</select>
+
+
+
+	<select id="getDateByStoreNum" resultType="Date">
+		SELECT store_start FROM store
+		WHERE store_num = #{storeNum}
+	</select>
+
+	<!-- count -->  
+	<update id="countStore" parameterType="popup.dto.Store">
+ 		UPDATE store
+ 		SET store_count =  store_count + 1
+ 		WHERE store_num = #{storeNum}
+ 	</update>
+	
+	<!-- delete -->
+	<delete id="deleteStore" parameterType="_int">
+		DELETE FROM store
+		WHERE store_num = #{storeNum}
+	</delete>
+	
+	
+	<update id="storeApprove" parameterType="int">
+		UPDATE store
+		SET
+		store_status = 1
+		WHERE store_num = #{storeNum}
+	</update>
+	<update id="storeDeny" parameterType="int">
+		UPDATE store
+		SET
+		store_status = 2
+		WHERE store_num = #{storeNum}
+	</update>
+	
+	<update id="addFavorite" parameterType="int">
+		UPDATE store
+		SET
+		store_favorite = store_favorite + 1
+		WHERE store_num = #{storeNum}
+	</update>
+	
+	
+	<update id="subFavorite" parameterType="int">
+		UPDATE store
+		SET
+		store_favorite = store_favorite - 1
+		WHERE store_num = #{storeNum}
+	</update>
+
+
+</mapper>

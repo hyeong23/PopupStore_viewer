@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="popup.mapper.PictureMapper">
+  
+  
+  <insert id="insertPicture" parameterType = "popup.dto.Picture">
+ 		INSERT INTO 
+ 		picture (picture_num,store_num,picture_path,picture_name,picture_original_name,picture_size,picture_date,picture_type)
+ 		VALUES(
+			    picture_sequence.nextval,
+				#{storeNum}, 
+				#{picturePath},
+				#{pictureName},
+				#{pictureOriginalName},
+				#{pictureSize},      
+				SYSDATE,
+				#{pictureType}
+	
+ 		)
+ 	</insert>
+ 	
+ 	<update id="updatePicture" parameterType = "popup.dto.Picture">
+ 		<!-- picture_num = #{pictureNum}이 0으로 고정값이 되어있어서 제거함  --> 
+ 		UPDATE picture
+ 		SET picture_path = #{picturePath},
+ 			picture_name = #{pictureName},
+ 			picture_original_name = #{pictureOriginalName},
+ 			picture_size = #{pictureSize},
+ 			picture_date = SYSDATE,
+ 			picture_type = #{pictureType}
+ 		WHERE store_num = #{storeNum} And picture_type = 1
+ 	</update>
+  	
+  	<select id="getPictureByStoreNum" resultMap="pictureResultMap">
+  		SELECT store_num, picture_name FROM picture WHERE store_num = #{storeNum} order by picture_num
+  	</select>
+  
+  	 <resultMap id="pictureResultMap" type="popup.dto.Picture">
+        <result property="pictureName" column="picture_name" />
+        <result property="storeNum" column="store_num" />
+    </resultMap>
+  
+  
+  	<select id="getThumbnailOne" resultType="String">
+  		SELECT picture_name FROM picture WHERE store_num = #{storeNum} And picture_type = 1
+  	</select>
+  
+  
+  <select id="getPictureOne" resultType="String">
+  		SELECT picture_name FROM picture WHERE store_num = #{storeNum} And picture_type = 0
+  	</select>
+  
+  <delete id="deletePicture" parameterType="_int">
+  	Delete picture where store_num = #{storeNum} And picture_type = #{pictureType}
+  </delete>
+  
+  
+  
+  
+  
+</mapper>

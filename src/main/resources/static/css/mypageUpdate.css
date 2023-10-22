@@ -1,0 +1,62 @@
+
+    .styled-table {
+        width: 100%;
+        background-color: #f8f9fa;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        height: 50px;
+        /* padding: 12px 0; */
+        text-align: left;
+        border-bottom: 1px solid #ebebeb;
+    }
+
+    .styled-table th {
+        background-color: #f2f2f2;
+         text-align: center;
+        font-weight: bold;
+    }
+
+    .styled-table td input[type="text"],
+    .styled-table td input[type="password"] {
+        width: 250px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .styled-table td input[type="text"]:read-only {
+        background-color: #f2f2f2;
+    }
+
+    .styled-table .center {
+        text-align: center;
+    }
+
+    .styled-table .error-message {
+        color: red;
+    }
+
+    .styled-table button {
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .styled-table button:hover {
+        background-color: #45a049;
+    }
+
+    .styled-table button[type="button"] {
+        background-color: #f44336;
+    }
+
+    .styled-table button[type="button"]:hover {
+        background-color: #da4331;
+    }

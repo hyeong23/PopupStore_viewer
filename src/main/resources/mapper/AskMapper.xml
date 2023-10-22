@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="popup.mapper.AskMapper">
+  
+  <select id="getAllAsk" resultMap="askResultMap">
+ 		SELECT * FROM ask where ask_check = 0 or ask_check = 1
+ 		ORDER by ask_num desc
+  </select>
+  
+  <insert id="insertAsk" parameterType="popup.dto.Ask">
+ 		INSERT INTO ASK (ask_num, 
+ 						 ask_email, 
+ 						 ask_title, 
+ 						 ask_body, 
+ 						 ask_check)
+					VALUES (ask_sequence.nextval,
+							#{askEmail},
+							#{askTitle},
+							#{askBody},
+							0)
+ 	</insert>
+ 	
+ 	<update id="updateAsk" parameterType="_int"> 
+        UPDATE ask
+     SET
+  		ask_Check = #{askCheck}
+  	 WHERE 
+  		ask_num = #{askNum}
+  	</update>
+  	
+  	<delete id="deleteAsk" parameterType="_int"> 
+        DELETE ask
+  	 WHERE 
+  		ask_num = #{askNum}
+  	</delete>
+  	
+  	
+  	
+  	
+  	
+  	
+      <resultMap id="askResultMap" type="popup.dto.Ask">
+        <result property="askNum" column="ask_num" />
+        <result property="askEmail" column="ask_email" />
+        <result property="askTitle" column="ask_title" />
+        <result property="askBody" column="ask_body" />
+         <result property="askCheck" column="ask_check" />
+          <result property="askCreate" column="ask_create" /> 
+    </resultMap>
+  
+  
+</mapper>

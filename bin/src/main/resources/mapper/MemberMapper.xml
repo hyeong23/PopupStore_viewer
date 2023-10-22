@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popup.mapper.MemberMapper">
+
+
+	<resultMap id="memberResultMap" type="popup.dto.Member">
+		<result property="memberNum" column="member_num" />
+		<result property="memberId" column="member_id" />
+		<result property="memberPw" column="member_pw" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberType" column="member_type" />
+		<result property="memberCompanyName"
+			column="member_company_name" />
+		<result property="memberCompanyNum" column="member_company_num" />
+		<result property="memberPhoneNum" column="member_phone_num" />
+		<result property="memberCreate" column="member_create" />
+		<result property="memberUpdate" column="member_update" />
+
+	</resultMap>
+
+
+
+
+	<select id="getMemberByIdAndPw" resultMap="memberResultMap">
+		SELECT
+		member_num,
+		member_id,
+		member_pw,
+		member_nickname,
+		member_type,
+		member_company_name,
+		member_company_num,
+		member_phone_num,
+		member_create,
+		member_update
+		From Member
+		WHERE member_id = #{memberId} AND member_pw = #{memberPw}
+
+	</select>
+	
+	 <select id = "getMember" resultMap="memberResultMap">
+			SELECT * From member Order By member_num desc
+ 	</select>
+
+	<select id="getMemberById" resultMap="memberResultMap">
+		SELECT
+		*
+		From Member
+		WHERE member_id = #{memberId}
+
+	</select>
+
+	<select id="getMemberByEmail" resultMap="memberResultMap">
+		SELECT
+		*
+		From Member
+		WHERE member_email = #{memberEmail}
+
+	</select>
+
+	<select id="getMemberByNickname" resultMap="memberResultMap">
+		SELECT
+		*
+		From Member
+		WHERE member_nickname = #{memberNickname}
+
+	</select>
+
+	<select id="getMemberByCompanyName" resultMap="memberResultMap">
+		SELECT
+		*
+		From Member
+		WHERE member_company_name = #{memberCompanyName}
+
+	</select>
+
+	<select id="getMemberByCompanyNum" resultMap="memberResultMap">
+		SELECT
+		*
+		From Member
+		WHERE member_company_num = #{memberCompanyNum}
+
+	</select>
+
+	<select id="getMemberByPhoneNum" resultMap="memberResultMap">
+		SELECT
+		*
+		From Member
+		WHERE member_phone_num = #{memberPhoneNum}
+
+	</select>
+
+	<insert id="insertGeneralMember"
+		parameterType="popup.dto.Member">
+		INSERT INTO
+		Member(member_num,member_id,member_pw,member_nickname,member_email,member_phone_num,member_type)
+		Values(member_sequence.nextval,#{memberId},#{memberPw},#{memberNickname},#{memberEmail},#{memberPhoneNum},#{memberType})
+
+	</insert>
+
+	<insert id="insertBusinessMember"
+		parameterType="popup.dto.Member">
+		INSERT INTO
+		Member(member_num,member_id,member_pw,member_email, member_company_name,member_company_num,member_phone_num,member_type)
+		Values(member_sequence.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberCompanyName},#{memberCompanyNum},#{memberPhoneNum},#{memberType})
+
+	</insert>
+	<!-- 회원정보 수정 -->
+	<update id="updateMember" parameterType="popup.dto.Member">
+    <if test="memberType == 0 || 1"> <!-- 일반 회원인 경우 -->
+        UPDATE Member
+        SET member_pw = #{memberPw}, member_nickname = #{memberNickname},
+        member_email = #{memberEmail}
+        WHERE member_id = #{memberId}
+    </if>
+    <if test="memberType == 2"> <!-- 비즈니스 회원인 경우 -->
+        UPDATE Member
+        SET member_pw = #{memberPw}, member_email = #{memberEmail},
+        member_company_num = #{memberCompanyNum}
+        WHERE member_id = #{memberId}
+    </if>
+</update>
+
+	<!-- 수정일자 업데이트 -->
+	<update id="updateMemberModificationDate"
+		parameterType="popup.dto.Member">
+		UPDATE Member
+		SET member_update = SYSDATE
+		WHERE member_id = #{memberId}
+	</update>
+
+
+    <select id="getBussinessMember" resultType="String">
+		SELECT
+		member_company_name
+		From Member
+		WHERE member_company_name is Not null
+	</select>
+	 <!-- 비지니스 회원가입 승인 -->
+	<update id="businessupdate" parameterType="_int">
+	 		UPDATE member 
+	 		SET member_type = 2
+	 		WHERE member_num = #{memberNum}
+ 	  </update>
+ 	 <!-- 비지니스 회원가입 거절(삭제)-->
+ 	  <delete id="businessdelete" parameterType="_int">
+	 		DELETE FROM member
+	 		WHERE member_num = #{memberNum}
+ 	  </delete>
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="popup.mapper.OpenStoreMapper">
+ 
+ 
+  
+  <select id="getOpenStoreList" resultMap="openStoreList">
+	SELECT m.member_company_name, s.store_num, s.store_loc, s.store_loc_detail, s.store_title, s.store_body, s.store_intro, s.store_start, s.store_end, s.store_site, s.store_count, s.store_create , s.store_update , p.picture_name,
+	s.store_favorite
+	FROM store s
+	JOIN picture p ON p.store_num = s.store_num
+    JOIN member m ON s.member_num = m.member_num
+    where p.picture_type = 1 And s.store_status = 1 AND s.store_end &gt; sysDate
+    ORDER BY s.store_favorite Desc
+  </select>
+  
+  
+  <select id="getMapList2" resultMap="openStoreList">
+    
+    SELECT m.member_company_name, s.store_num, s.store_loc, s.store_loc_detail, s.store_title, s.store_body, s.store_intro, s.store_start, s.store_end, s.store_site, s.store_count, s.store_create , s.store_update , p.picture_name,
+	store_create, store_update
+	FROM store s
+	JOIN picture p ON p.store_num = s.store_num
+    JOIN member m ON s.member_num = m.member_num
+    where p.picture_type = 1 and s.store_num = #{storeNum}
+    
+	
+      
+  </select>
+  
+
+  
+  
+ 	<resultMap id="openStoreList" type="popup.vo.StoreVo">
+        <result property="storeNum" column="store_num" />
+         <result property="memberNum" column="member_num" />
+         <result property="memberCompanyName" column="member_company_name" />
+        <result property="storeTitle" column="store_title" />
+        <result property="storeIntro" column="store_intro" />
+        <result property="storeBody" column="store_body" />
+        <result property="storeStart" column="store_start" />
+        <result property="storeEnd" column="store_end" />
+        <result property="storeFavorite" column="store_favorite" />
+        <result property="storeLoc" column="store_loc"/>
+        <result property="storeLocDetail" column="store_loc_detail"/>
+        <result property="storeSite" column="store_site"/>
+        <result property="storeStatus" column="store_status" />      
+        <result property="pictureName" column="picture_name" />
+        <result property="pictureNum" column="picture_num" />
+        <result property="storeCount" column="store_count" />
+		<result property="storeCreate" column="store_create" />
+		<result property="storeUpdate" column="store_update" />
+    </resultMap>
+    
+    <select id="searchStoreByTitleAndLoc" resultType="_int">
+   	 	SELECT store_num FROM store
+    	WHERE store_title LIKE '%' || #{search} || '%'
+    	OR store_loc LIKE '%' || #{search} || '%'
+    	ORDER BY store_num ASC
+	</select>
+
+	 <select id="searchMemberByName" resultType="String">
+   	 	SELECT member_company_name FROM member
+    	WHERE member_company_name LIKE '%' || #{search} || '%'
+	</select>
+	
+     <select id="filterStoreList" resultMap="openStoreList">
+    
+      SELECT   s.store_num, s.store_loc, s.store_loc_detail, s.store_title, s.store_body, s.store_intro, s.store_start, s.store_end, s.store_site, s.store_count, s.store_create , s.store_update , p.picture_name,s.store_favorite
+      FROM store s
+      JOIN picture p ON p.store_num = s.store_num
+      WHERE p.picture_type = 1 And s.store_status = 1 AND s.store_end &gt; sysDate AND s.store_num IN 
+        <foreach item="item" collection="storeNum" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+      ORDER BY s.store_favorite Desc
+      	
+  </select>
+  
+  
+ 	
+ 	<!-- 스토어 번호를 통한 조회수 증가 -->
+ 	<update id="countStoreByStoreNum" parameterType = "_int">
+ 		UPDATE store
+ 		SET store_count = store_count + 1
+ 		WHERE store_num = #{storeNum}
+ 	</update>
+	
+ 
+   
+  
+</mapper>
